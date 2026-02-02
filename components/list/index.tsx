@@ -1,6 +1,7 @@
 import { FlatList } from 'react-native';
+import { format, parseISO } from 'date-fns';
 
-import type { Payslip } from '@types/payslip';
+import type { Payslip } from '@models/payslip';
 
 import { ListItem } from '../listItem';
 import { styles } from './styles';
@@ -21,7 +22,7 @@ export function List({ data, onItemPress }: ListProps) {
         <ListItem
           id={item.id}
           title={item.id}
-          subtitle={`${item.fromDate} - ${item.toDate}`}
+          subtitle={`${format(parseISO(item.fromDate), 'yyyy-MM-dd')} to ${format(parseISO(item.toDate), 'yyyy-MM-dd')}`}
           onPress={() => onItemPress(item)}
         />
       )}

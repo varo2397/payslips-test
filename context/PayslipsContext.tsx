@@ -28,11 +28,7 @@ export function PayslipsProvider({ children }: { children: ReactNode }) {
     const filtered = payslips.filter((item) => {
       if (!filterQuery.trim()) return true;
       const query = filterQuery.trim().toLowerCase();
-      return (
-        item.id.toLowerCase().includes(query) ||
-        item.fromDate.toLowerCase().includes(query) ||
-        item.toDate.toLowerCase().includes(query)
-      );
+      return item.id.toLowerCase().includes(query);
     });
 
     const sorted = [...filtered].sort((a, b) => {

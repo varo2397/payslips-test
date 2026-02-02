@@ -3,4 +3,5 @@ export type Payslip = {
   fromDate: string;
   toDate: string;
   fileType: 'pdf' | 'image';
+  file: number;
 };
