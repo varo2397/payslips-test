@@ -1,12 +1,9 @@
 import type { ReactNode } from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
+import { compareAsc, compareDesc, parseISO } from 'date-fns';
 
-export type Payslip = {
-  id: string;
-  fromDate: string;
-  toDate: string;
-  fileType: 'pdf' | 'image';
-};
+import { mockPayslips } from '@const/mockPayslips';
+import type { Payslip } from '@models/payslip';
 
 export type SortOrder = 'recent' | 'oldest';
 
@@ -22,29 +19,8 @@ type PayslipsContextValue = {
 
 const PayslipsContext = createContext<PayslipsContextValue | undefined>(undefined);
 
-const seedPayslips: Payslip[] = [
-  {
-    id: 'PSL-001',
-    fromDate: '2025-12-01',
-    toDate: '2025-12-31',
-    fileType: 'pdf',
-  },
-  {
-    id: 'PSL-002',
-    fromDate: '2025-11-01',
-    toDate: '2025-11-30',
-    fileType: 'image',
-  },
-  {
-    id: 'PSL-003',
-    fromDate: '2025-10-01',
-    toDate: '2025-10-31',
-    fileType: 'pdf',
-  },
-];
-
 export function PayslipsProvider({ children }: { children: ReactNode }) {
-  const [payslips] = useState<Payslip[]>(seedPayslips);
+  const [payslips] = useState<Payslip[]>(mockPayslips);
   const [sortOrder, setSortOrder] = useState<SortOrder>('recent');
   const [filterQuery, setFilterQuery] = useState('');
 
@@ -61,9 +37,9 @@ export function PayslipsProvider({ children }: { children: ReactNode }) {
 
     const sorted = [...filtered].sort((a, b) => {
       if (sortOrder === 'oldest') {
-        return a.fromDate.localeCompare(b.fromDate);
+        return compareAsc(parseISO(a.fromDate), parseISO(b.fromDate));
       }
-      return b.fromDate.localeCompare(a.fromDate);
+      return compareDesc(parseISO(a.fromDate), parseISO(b.fromDate));
     });
 
     return sorted;

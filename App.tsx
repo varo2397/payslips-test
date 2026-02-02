@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { PayslipsProvider } from '@context/PayslipsContext';
@@ -9,7 +8,6 @@ export default function App() {
     <PayslipsProvider>
       <NavigationContainer>
         <RootNavigator />
-        <StatusBar style="auto" />
       </NavigationContainer>
     </PayslipsProvider>
   );

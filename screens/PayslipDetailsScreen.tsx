@@ -6,7 +6,7 @@ import type { RootStackParamList } from '@navigation/types';
 type Props = NativeStackScreenProps<RootStackParamList, 'PayslipDetails'>;
 
 export function PayslipDetailsScreen({ route }: Props) {
-  const { id, fromDate, toDate, fileType } = route.params;
+  const { id } = route.params;
 
   return (
     <View style={styles.container}>

@@ -11,6 +11,8 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@components/*": ["components/*"],
+      "@models/*": ["types/*"],
+      "@const/*": ["constants/*"]
     }
   }
 }

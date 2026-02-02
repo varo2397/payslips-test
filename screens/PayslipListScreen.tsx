@@ -2,27 +2,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import type { RootStackParamList } from '@navigation/types';
+import { List } from '@components/list';
+import { usePayslips } from '@context/PayslipsContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PayslipList'>;
 
 export function PayslipListScreen({ navigation }: Props) {
+  const { visiblePayslips } = usePayslips();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Payslip List</Text>
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() =>
-          navigation.navigate('PayslipDetails', {
-            id: 'PSL-001',
-            fromDate: '2025-12-01',
-            toDate: '2025-12-31',
-            fileType: 'pdf',
-          })
-        }
-      >
-        <Text style={styles.itemTitle}>PSL-001</Text>
-        <Text style={styles.itemSubtitle}>2025-12-01 to 2025-12-31</Text>
-      </TouchableOpacity>
+      <List data={visiblePayslips} onItemPress={(item) => navigation.push('PayslipDetails', {id: item.id})}/>
     </View>
   );
 }
