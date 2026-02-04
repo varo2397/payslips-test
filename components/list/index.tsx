@@ -1,7 +1,6 @@
-import { FlatList } from 'react-native';
-import { format, parseISO } from 'date-fns';
-
 import type { Payslip } from '@models/payslip';
+import { format, parseISO } from 'date-fns';
+import { FlatList } from 'react-native';
 
 import { ListItem } from '../listItem';
 import { styles } from './styles';

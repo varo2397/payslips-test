@@ -1,9 +1,8 @@
-import type { ReactNode } from 'react';
-import { createContext, useContext, useMemo, useState } from 'react';
-import { compareAsc, compareDesc, parseISO } from 'date-fns';
-
 import { mockPayslips } from '@const/mockPayslips';
 import type { Payslip } from '@models/payslip';
+import { compareAsc, compareDesc, parseISO } from 'date-fns';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 export type SortOrder = 'recent' | 'oldest';
 

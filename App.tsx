@@ -1,7 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
-
 import { PayslipsProvider } from '@context/PayslipsContext';
 import { RootNavigator } from '@navigation/RootNavigator';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (

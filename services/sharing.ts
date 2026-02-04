@@ -6,7 +6,7 @@ export const isAvailable = async (): Promise<boolean> => {
 
 export const shareFile = async (
   fileUri: string,
-  options: { mimeType: string; dialogTitle: string }
+  options: { mimeType: string; dialogTitle: string },
 ): Promise<void> => {
   await Sharing.shareAsync(fileUri, options);
 };

@@ -1,7 +1,7 @@
 import { Payslip } from '../types/payslip';
 
-const mockPdfFile = require('../assets/sample-local-pdf.pdf');
 const mockImageFile = require('../assets/sample-local-image.jpg');
+const mockPdfFile = require('../assets/sample-local-pdf.pdf');
 
 export const mockPayslips: Payslip[] = [
   {

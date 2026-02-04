@@ -1,8 +1,7 @@
+import type { RootStackParamList } from '@navigation/types';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { PayslipDetailsScreen } from '@screens/payslipDetailsScreen';
 import { PayslipListScreen } from '@screens/payslipListScreen';
-import type { RootStackParamList } from '@navigation/types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

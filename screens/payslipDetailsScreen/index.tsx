@@ -1,13 +1,13 @@
+import { Button } from '@components/button';
+import { StatusModal, StatusModalType } from '@components/statusModal';
+import { usePayslips } from '@context/PayslipsContext';
+import type { RootStackParamList } from '@navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { payslipDownloadService } from '@services/payslipDownload';
+import { format, parseISO } from 'date-fns';
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
-import { format, parseISO } from 'date-fns';
 
-import type { RootStackParamList } from '@navigation/types';
-import { usePayslips } from '@context/PayslipsContext';
-import { payslipDownloadService } from '@services/payslipDownload';
-import { StatusModal, StatusModalType } from '@components/statusModal';
-import { Button } from '@components/button';
 import { styles } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PayslipDetails'>;
@@ -35,13 +35,15 @@ export function PayslipDetailsScreen({ route }: Props) {
       });
 
       setModalType('success');
-      const location = Platform.OS === 'ios' 
-        ? `Find it in Files app:\nOn My iPhone → payslips`
-        : `Choose a folder (Downloads) in the picker to save it`;
+      const location =
+        Platform.OS === 'ios'
+          ? `Find it in Files app:\nOn My iPhone → payslips`
+          : `Choose a folder (Downloads) in the picker to save it`;
       setModalMessage(`Payslip saved successfully!\n\nFile: ${savedFileName}\n\n${location}`);
     } catch (error) {
       console.error('Download error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Failed to download payslip. Please try again.';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to download payslip. Please try again.';
       setModalType('error');
       setModalMessage(errorMessage);
     }
@@ -65,15 +67,15 @@ export function PayslipDetailsScreen({ route }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Payslip Details</Text>
-      
+
       <Text style={styles.label}>ID</Text>
       <Text style={styles.value}>{payslip.id}</Text>
-      
+
       <Text style={styles.label}>Period</Text>
       <Text style={styles.value}>
         {formattedFromDate} to {formattedToDate}
       </Text>
-      
+
       <Text style={styles.label}>File Type</Text>
       <Text style={styles.value}>{payslip.fileType.toUpperCase()}</Text>
 

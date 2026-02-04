@@ -1,4 +1,5 @@
 import { TouchableOpacity, Text } from 'react-native';
+
 import { styles } from './styles';
 
 export type ButtonVariant = 'primary' | 'success' | 'error';

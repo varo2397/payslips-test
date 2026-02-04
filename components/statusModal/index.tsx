@@ -1,5 +1,6 @@
-import { Modal, View, Text, ActivityIndicator } from 'react-native';
 import { Button } from '@components/button';
+import { Modal, View, Text, ActivityIndicator } from 'react-native';
+
 import { styles } from './styles';
 
 export type StatusModalType = 'loading' | 'error' | 'success';
@@ -17,12 +18,7 @@ export function StatusModal({ visible, type, message, onClose }: StatusModalProp
   const isSuccess = type === 'success';
 
   return (
-    <Modal
-      transparent
-      visible={visible}
-      animationType="fade"
-      onRequestClose={onClose}
-    >
+    <Modal transparent visible={visible} animationType="fade" onRequestClose={onClose}>
       <View style={styles.overlay}>
         <View style={styles.container}>
           {isLoading && (

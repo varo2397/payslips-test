@@ -17,7 +17,7 @@ export const getCacheDirectory = (): string => {
 export const copyFile = async (from: string, to: string): Promise<void> => {
   const sourceFile = new File(from);
   const destinationFile = new File(to);
-  
+
   await sourceFile.copy(destinationFile);
 };
 
