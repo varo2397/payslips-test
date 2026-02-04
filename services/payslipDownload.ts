@@ -15,10 +15,12 @@ export const downloadPayslip = async ({
   const localUri = await assetService.loadAsset(file);
 
   const actualExtension = localUri.split('.').pop() || 'pdf';
-  const timestamp = Date.now();
-  const fullFileName = `${fileName}_${timestamp}.${actualExtension}`;
+  const fullFileName = `${fileName}.${actualExtension}`;
 
   const fileUri = `${fileSystemService.getDocumentDirectory()}${fullFileName}`;
+
+  fileSystemService.deleteFileIfExists(fileUri);
+
   await fileSystemService.copyFile(localUri, fileUri);
 
   return fullFileName;

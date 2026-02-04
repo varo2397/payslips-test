@@ -38,7 +38,7 @@ export function PayslipDetailsScreen({ route }: Props) {
       const location =
         Platform.OS === 'ios'
           ? `Find it in Files app:\nOn My iPhone → payslips`
-          : `Choose a folder (Downloads) in the picker to save it`;
+          : `File saved in the apps documents`;
       setModalMessage(`Payslip saved successfully!\n\nFile: ${savedFileName}\n\n${location}`);
     } catch (error) {
       console.error('Download error:', error);
