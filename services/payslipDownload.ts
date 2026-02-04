@@ -1,3 +1,5 @@
+import { getFileExtension } from '@utils/fileExtension';
+
 import { assetService } from './asset';
 import { fileSystemService } from './fileSystem';
 
@@ -14,7 +16,7 @@ export const downloadPayslip = async ({
 }: DownloadPayslipParams): Promise<string> => {
   const localUri = await assetService.loadAsset(file);
 
-  const actualExtension = localUri.split('.').pop() || 'pdf';
+  const actualExtension = getFileExtension(localUri, 'pdf');
   const fullFileName = `${fileName}.${actualExtension}`;
 
   const fileUri = `${fileSystemService.getDocumentDirectory()}${fullFileName}`;

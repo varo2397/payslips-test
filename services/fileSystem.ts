@@ -21,6 +21,11 @@ export const copyFile = async (from: string, to: string): Promise<void> => {
   await sourceFile.copy(destinationFile);
 };
 
+export const fileExists = (uri: string): boolean => {
+  const file = new File(uri);
+  return file.exists;
+};
+
 export const deleteFileIfExists = (uri: string): void => {
   const file = new File(uri);
   if (file.exists) {
@@ -32,5 +37,6 @@ export const fileSystemService = {
   getDocumentDirectory,
   getCacheDirectory,
   copyFile,
+  fileExists,
   deleteFileIfExists,
 };
