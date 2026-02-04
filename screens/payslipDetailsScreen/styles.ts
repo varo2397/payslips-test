@@ -19,16 +19,4 @@ export const styles = StyleSheet.create({
   value: {
     fontSize: 16,
   },
-  downloadButton: {
-    backgroundColor: '#3b82f6',
-    padding: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 24,
-  },
-  downloadButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
 });

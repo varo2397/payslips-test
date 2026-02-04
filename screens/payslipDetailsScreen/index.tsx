@@ -1,11 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { format, parseISO } from 'date-fns';
 
 import type { RootStackParamList } from '@navigation/types';
 import { usePayslips } from '@context/PayslipsContext';
 import { payslipDownloadService } from '@services/payslipDownload';
+import { StatusModal, StatusModalType } from '@components/statusModal';
+import { Button } from '@components/button';
 import { styles } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PayslipDetails'>;
@@ -14,28 +16,39 @@ export function PayslipDetailsScreen({ route }: Props) {
   const { id } = route.params;
   const { getById } = usePayslips();
   const payslip = getById(id);
-  const [downloading, setDownloading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState<StatusModalType>('loading');
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleDownload = async () => {
     if (!payslip) return;
 
     try {
-      setDownloading(true);
+      setModalType('loading');
+      setModalMessage('Downloading payslip...');
+      setModalVisible(true);
 
-      await payslipDownloadService.downloadPayslip({
+      const savedFileName = await payslipDownloadService.downloadPayslip({
         file: payslip.file,
         fileType: payslip.fileType,
         fileName: `${payslip.id}_payslip`,
       });
 
-      Alert.alert('Success', 'Payslip downloaded successfully!');
+      setModalType('success');
+      const location = Platform.OS === 'ios' 
+        ? `Find it in Files app:\nOn My iPhone → payslips`
+        : `Choose a folder (Downloads) in the picker to save it`;
+      setModalMessage(`Payslip saved successfully!\n\nFile: ${savedFileName}\n\n${location}`);
     } catch (error) {
       console.error('Download error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Failed to download payslip. Please try again.';
-      Alert.alert('Error', errorMessage);
-    } finally {
-      setDownloading(false);
+      setModalType('error');
+      setModalMessage(errorMessage);
     }
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
   };
 
   if (!payslip) {
@@ -64,17 +77,18 @@ export function PayslipDetailsScreen({ route }: Props) {
       <Text style={styles.label}>File Type</Text>
       <Text style={styles.value}>{payslip.fileType.toUpperCase()}</Text>
 
-      <TouchableOpacity
-        style={styles.downloadButton}
+      <Button
+        title="Download Payslip"
         onPress={handleDownload}
-        disabled={downloading}
-      >
-        {downloading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          <Text style={styles.downloadButtonText}>Download Payslip</Text>
-        )}
-      </TouchableOpacity>
+        disabled={modalVisible && modalType === 'loading'}
+      />
+
+      <StatusModal
+        visible={modalVisible}
+        type={modalType}
+        message={modalMessage}
+        onClose={handleCloseModal}
+      />
     </View>
   );
 }

@@ -1,7 +1,7 @@
 import { Payslip } from '../types/payslip';
 
-// Mock file - using require for bundled asset
-const mockPdfFile = require('../assets/favicon.png');
+const mockPdfFile = require('../assets/sample-local-pdf.pdf');
+const mockImageFile = require('../assets/sample-local-image.jpg');
 
 export const mockPayslips: Payslip[] = [
   {
@@ -23,7 +23,7 @@ export const mockPayslips: Payslip[] = [
     fromDate: '2025-11-01T00:00:00.000Z',
     toDate: '2025-11-30T23:59:59.999Z',
     fileType: 'image',
-    file: mockPdfFile,
+    file: mockImageFile,
   },
   {
     id: 'PAY-004',
@@ -37,6 +37,6 @@ export const mockPayslips: Payslip[] = [
     fromDate: '2025-09-01T00:00:00.000Z',
     toDate: '2025-09-30T23:59:59.999Z',
     fileType: 'image',
-    file: mockPdfFile,
+    file: mockImageFile,
   },
 ];
