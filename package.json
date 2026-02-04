@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern \"**/*.config.js\"",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-pattern \"**/*.config.js\" --fix",
     "format": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "prepare": "husky"
   },
   "dependencies": {
@@ -31,6 +33,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
@@ -42,8 +47,10 @@
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react-native": "^5.0.0",
     "husky": "^9.1.7",
+    "jest-expo": "^54.0.17",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
+    "react-test-renderer": "^19.1.0",
     "typescript": "~5.9.2"
   },
   "lint-staged": {

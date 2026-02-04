@@ -15,7 +15,7 @@ import { styles } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PayslipDetails'>;
 
-export function PayslipDetailsScreen({ route }: Props) {
+export function PayslipDetailsScreen({ route, navigation }: Props) {
   const { id } = route.params;
   const { getById } = usePayslips();
   const payslip = getById(id);
@@ -41,6 +41,12 @@ export function PayslipDetailsScreen({ route }: Props) {
   useEffect(() => {
     updateSavedFileStatus();
   }, [payslip]);
+
+  useEffect(() => {
+    if (payslip) {
+      navigation.setOptions({ title: payslip.id });
+    }
+  }, [navigation, payslip]);
 
   const handleDownload = async () => {
     if (!payslip) return;
